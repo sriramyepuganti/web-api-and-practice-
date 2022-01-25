@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>clock</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        html {
+            --clock-dimension: 400px;
+            --clock-bg: #000;
+            --clock-color: #fff;
+            --min-rotate: 0deg;
+            --hour-rotate: 45deg;
+            --seconds-rotate: 90deg;
+        }
+
+        .clock-container {
+            width: 100%;
+            height: 100vh;
+            background-color: var(--clock-bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .clock {
+            width: var(--clock-dimension);
+            height: var(--clock-dimension);
+            background-color: var(--clock-color);
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .pin {
+            width: 10px;
+            position: absolute;
+            transform-origin: bottom;
+            bottom: 100%;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+
+        }
+
+        .dot {
+            width: 20px;
+            height: 20px;
+            background-color: black;
+            border-radius: 50%;
+            inset: 0;
+            margin: auto;
+            position: absolute;
+        }
+
+        .hour {
+            height: 50px;
+            background-color: red;
+            transform: translate(calc(var(--clock-dimension)/2),calc(var(--clock-dimension)/2)) rotate(var(--hour-rotate));
+        }
+        .minute {
+            height: 100px;
+            background-color: blue;
+            transform: translate(calc(var(--clock-dimension)/2),calc(var(--clock-dimension)/2)) rotate(var(--min-rotate));
+        }
+        .seconds {
+            height: 150px;
+            background-color: green;
+            transform: translate(calc(var(--clock-dimension)/2),calc(var(--clock-dimension)/2)) rotate(var(--seconds-rotate));
+        }
+    </style>
+</head>
+<body>
+    <div class="clock-container">
+        <div class="clock">
+            <div class="pin hour"></div>
+            <div class="pin minute"></div>
+            <div class="pin seconds"></div>
+            <div class="dot"></div>
+        </div>
+    </div>
+
+    <script>
+        addEventListener('load', function(eve) {
+            setDate();
+        });
+
+        function setDate() {
+            const date = new Date();
+            const seconds = date.getSeconds();
+            const minutes = date.getMinutes();
+            const hours = date.getHours();
+            var r = document.querySelector(':root');
+            r.style.setProperty('--min-rotate', `${minutes*6}deg`);
+            r.style.setProperty('--hour-rotate', `${hours*30+ minutes/2}deg`);
+            r.style.setProperty('--seconds-rotate', `${seconds*6}deg`);
+
+            
+
+            
+        }
+
+        setInterval(setDate,1000); </script>
+</body>
+</html>

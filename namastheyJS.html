@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>namasthey js</title>
+</head>
+
+<body>
+    <input type="text" name="text" onkeypress="debounceTest('hii')">
+    <button onclick="throttlingTest()">throttling</button>
+    <div onclick="alert('bubbling div')">
+        <h1>event bubbling</h1>
+        <button onclick="alert('button click')">click me</button>
+        <div>note: use event.stopPropagation to stop. if element has multiple event handlers use this one event.stopImmediatePropagation()</div>
+    </div>
+
+    <div id="testCaptureParent">
+        <h1>event capturing</h1>
+        <button id="testCapture">click me</button>
+    </div>
+
+    <script>
+        // global excution context
+        /*
+        * if you run js programm. initial stage global excution context is created. it contains all the variable declared with 
+        var and functions 
+        * each function will create another context
+
+        */
+
+        /*
+        ex:    code                memory
+               var a=10;           b: undefined, a: undefined
+               let b=10
+               fun test(){         fun: fun(){}
+
+               }
+        */
+        // debugger; // check dev tools => source => scope
+        console.log({
+            a_declared_with_var: a
+        });
+        // console.log({b_declared_with_let: b});
+        var a = 10;
+        let b = 10;
+        const c = 10;
+
+        function fun() {
+            var a = 10;
+            let b = 10;
+        };
+        fun();
+        var fun1 = function () {};
+
+
+        // call stack
+        /*
+        GEC is moved to call stack. and all the functions will be invoked from here. whenever it face async it will moved to
+        web api. once it timer is up. it is moved to event queue. event loop will look into call stack. if it is empty. fun in event
+        queue is moved to call stack 
+        */
+
+        // hoisting
+        /*
+        Due to GEC variables declared with var and functions are hoisted 
+        */
+
+        // temporal dead zone (TDA)
+
+        {
+            //console.log(letA); //TDA of letA
+            let letA = 24;
+        }
+
+        // shadowing
+        /*
+        
+        What is ‘variable shadowing’? Variable shadowing occurs when a variable of an inner scope is defined with the same name as a variable 
+        in the outer scope. In the inner scope, both variables’ scope overlap.*/
+
+        // closures
+        /*
+        Closure means that an inner function always has access to the vars and parameters of its outer function, even after the outer function
+         has returned.
+        */
+        function Counter() {
+            let timer = 0;
+            return () => {
+                timer++;
+                return timer;
+            }
+        }
+        let testCounter = Counter();
+        for (let i = 0; i < 10; i++) {
+            console.log({
+                counter: testCounter()
+            })
+        }
+        // currying
+        function curry(f) {
+            return function (a) {
+                return function (b) {
+                    return f(a, b);
+                };
+            };
+        }
+
+        function sum(a, b) {
+            return a + b;
+        }
+
+        console.log({curry: curry(sum)(3)(2)});
+
+        // __proto__, prototype
+
+        Array.prototype.testFun = function() { return "custom msg"};
+        let arr = [1,2,3];
+        console.log({prototypeTest: arr.testFun()})
+        console.log(arr.__proto__ === Array.prototype);
+        console.log(arr.__proto__.__proto__ === Object.prototype);
+        console.log(arr.__proto__.__proto__.__proto__)
+
+        // call,apply,bind
+        /*
+        above functions are to overide the default this
+        */
+        function testBindCallApply(txt, arg1, arg2) {
+            console.log({
+                funThis: this,
+                arg1,
+                arg2,
+                text: txt
+            });
+        }
+
+        testBindCallApply("with default this", 1, 2);
+        testBindCallApply.bind({
+            id: 1
+        })("with bind", 1, 2);
+        testBindCallApply.call({
+            id: 5
+        }, "with call", 1, 2);
+        testBindCallApply.apply({
+            id: 10
+        }, ["test with apply", 1, 2])
+
+        // recursion
+
+        function recursion(n) {
+            return n >= 0 ? 1 : n * recursion(n - 1);
+        }
+
+        console.log({
+            recursionVal: recursion(1)
+        });
+
+        // debouncing
+        /*
+        debouncing executes the function only after some cooling period
+        */
+        let debounceTest = debounce(fetchData, 1000);
+
+        function debounce(fun, delay) {
+            let timer;
+            return (...arg) => {
+                clearTimeout(timer);
+                timer = setTimeout(() => fun.apply(this, arg), delay);
+            }
+        }
+
+        function fetchData(a) {
+            console.log(a);
+        }
+        // throttling
+        /*
+        throttling executes the function at a regular interval
+        */
+
+        let throttlingTest = throttling(fetchData, 100);
+
+        function throttling(fun, delay) {
+            let wait = false;
+            return (arg) => {
+                if (!wait) {
+                    fun.call(this, arg);
+                    wait = true;
+                    setTimeout(() => {
+                        wait = false;
+                    }, delay)
+
+                }
+            }
+        }
+        // event capture
+        document.getElementById("testCapture").addEventListener("click",(e)=>{
+            alert('capture event')
+        },true)
+
+        document.getElementById("testCaptureParent").addEventListener("click",(e)=>{
+            alert('parent div')
+        },true)
+
+        //event delegation
+        /*
+        Capturing and bubbling allow us to implement one of most powerful event handling patterns called event delegation.
+        */
+    </script>
+</body>
+
+</html>

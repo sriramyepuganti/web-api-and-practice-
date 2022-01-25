@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //Geo location API
+
+        navigator.geolocation.getCurrentPosition(e => console.log(e))
+
+        // web storage
+        //cookie 4kb 
+        /*Stores data that has to be sent back to the server with subsequent XHR requests. Its expiration varies based on 
+        the type and the expiration duration can be set from either server-side or client-side .)*/
+        document.cookie = "user=John; path=/; expires=Tue, 19 Jan 2038 03:14:07 GMT";
+        //local storage 5mb
+        /*(It allows the saving of key/value pairs in a web browser and it stores data with no expiration date)*/
+        localStorage.setItem("name", "user");
+        // localStorage.clear();
+        console.log(localStorage.getItem("name"))
+        //session storage 5-10mb
+        /*(stores data only for a session, meaning that the data is stored until the browser (or tab) is 
+        closed and opening multiple tabs/windows with the same URL creates sessionStorage for each tab/window)*/
+        sessionStorage.setItem("name", "user");
+        // sessionStorage.clear();
+        console.log(sessionStorage.getItem("name"))
+
+
+        //index db (10 MB to 2 GB)
+        /*
+        IndexedDB is a way for you to persistently store data inside a user's browser. Because it lets you create web applications 
+        with rich query abilities regardless of network availability, your applications can work both online and offline.
+        */
+        const dbName = "the_name";
+
+        var request = indexedDB.open(dbName, 2);
+
+        request.onerror = function (event) {
+            // Handle errors.
+        };
+        request.onupgradeneeded = function (event) {
+            var db = event.target.result;
+            var objectStore = db.createObjectStore("customers", { keyPath: "ssn" });
+            objectStore.createIndex("name", "name", { unique: false });
+
+
+            objectStore.createIndex("email", "email", { unique: true });
+
+            objectStore.transaction.oncomplete = function (event) {
+                var customerObjectStore = db.transaction("customers", "readwrite").objectStore("customers");
+                customerData.forEach(function (customer) {
+                    customerObjectStore.add(customer);
+                });
+            };
+        };
+
+        // web sql
+        var db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);
+        db.transaction(function (tx) {
+            tx.executeSql('CREATE TABLE IF NOT EXISTS LOGS (id unique, log)');
+            tx.executeSql('INSERT INTO LOGS (id, log) VALUES (1, "foobar")');
+            tx.executeSql('INSERT INTO LOGS (id, log) VALUES (2, "logmsg")');
+        });
+
+        // web workers
+        /*
+        *When executing scripts in an HTML page, the page becomes unresponsive until the script is finished.
+        * Web Workers are a simple means for web content to run scripts in background threads
+        */
+
+        let work = new Worker('./index.js');
+        work.postMessage('hello');
+        work.onmessage = function (e) {
+            console.log('dev tool html');
+            console.log(e);
+        }
+
+        //  service worker
+        /*
+        *A service worker is a script that runs independently in the browser background. On the user side, it can intercept its network requests and decide what to load (fetch).
+        *Service workers mainly serve features like background sync, push notifications and they are commonly used for’offline first’ applications, giving the developers the opportunity to take complete control over the user experience.
+        * The service worker lifecycle is completely separate from the web page. It’s a programmable network proxy
+        * Service Worker can’t:‘
+
+        Access the Parent Object
+        Access the Window Object
+        Access the Document Object
+        Access the DOM
+
+        *However, the Service Worker can:
+
+        Cache Assets & API calls
+        Manage Push Notifications
+        Control the Network Traffic
+        Store the Application Cache
+        Common use cases:
+
+        Offline-optimized experience
+        Sending Push Notifications
+        Background sync
+        * HTTPS unless on localhost
+        ***steps
+        *installing
+        * activating
+        * fetch
+        */
+        // let worker = navigator.serviceWorker.register('/',)
+        navigator.serviceWorker.register('./service_worker.js')
+            .then(reg => console.log('Service Worker Registered'))
+            .catch(swErr => console.log(
+                `Service Worker Installation Error: ${swErr}}`));
+
+
+
+        //SSE (server sent event) (one way messaging)
+
+        // const evtSource = new EventSource("//api.example.com/ssedemo.php", { withCredentials: true } );
+        // evtSource.onmessage = function(e) {console.log(e)};
+
+        //web socket (duplex commincation)
+        let ws = new WebSocket('wss://www.example.com/socketserver');
+        ws.open = function(e) {
+            console.log(e);
+            ws.send("hello")
+        }
+
+        ws.onmessage = function(e) {
+
+        }
+        // fetch
+        /*
+        *fetch() won’t send cross-origin cookies unless you set the credentials init option (to include).
+        * fetch(url,initObj)
+        * initObj = {
+        *                method: 'GET/POST/PUT/DELETE/PATCH',
+        *                body:     Bolb/FormData/URLSearchParams/USVString/ReadableStream,
+        *                mode: 'cors/no-cors/same-origin',
+        *               credentials: 'omit/same-origin/include',
+        *               cache: 'default/no-store/reload/no-cache/force-cache' }
+        * 
+        */
+
+        //Headers
+        /**
+         * HTTP headers let the client and the server pass additional information with an HTTP request or response. 
+         * An HTTP header consists of its case-insensitive name followed by a colon (:), then by its value.
+         * Custom proprietary headers have historically been used with an X- prefix. but it is deprected
+         * request headers,response headers, represntiional header, payload header
+         * cors: cross origin resource sharing. browser will block bedefault
+         * 
+        */
+
+        // fetch('https://jsonplaceholder.typicode.com/todos/1')
+        //     .then(response => response.json())
+        //     .then(json => console.log(json))
+
+        //get: GET requests do not support bodies if you add it. it will through error, and parameters must be sent in the URL as you have shown in your example
+
+        fetch('https://jsonplaceholder.typicode.com/todos/1', {
+            method: 'GET'
+        })
+            .then(response => response.json())
+            .then(json => console.log(json))
+
+        //post : we can send payload and query params also
+        fetch('https://jsonplaceholder.typicode.com/posts', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: JSON.stringify({
+                title: 'foo',
+                body: 'bar',
+                userId: 1,
+            })
+        })
+            .then((response) => response.json())
+            .then((json) => console.log(json));
+
+        //update: we can have payload and query params
+        fetch('https://jsonplaceholder.typicode.com/posts/1', {
+            method: 'PUT',
+            body: JSON.stringify({
+                id: 1,
+                title: 'foo',
+                body: 'bar',
+                userId: 1,
+            })
+        })
+            .then((response) => response.json())
+            .then((json) => console.log(json));
+
+        //delete: we can get payload and query params
+        fetch('https://jsonplaceholder.typicode.com/posts/1', {
+            method: 'DELETE'
+        });
+
+        //patch
+        fetch('https://jsonplaceholder.typicode.com/posts/1', {
+            method: 'PATCH',
+            body: JSON.stringify({
+                title: 'foo',
+            })
+        })
+            .then((response) => response.json())
+            .then((json) => console.log(json));
+
+
+    //authentication : 401 (not logged in)
+    //autherization: 403 (unauthorized)
+    // user name password scheme
+    /* stateful (session using cookie): Session based authentication is one in which the user state is stored on the server’s memory
+    * server will create session in memery and send session id to client add to cookie
+    */
+    /*stateless (jwt,oauth)
+    * token sent to client. client will save it in cookie or local storage
+    */
+
+    </script>
+</body>
+
+</html>
