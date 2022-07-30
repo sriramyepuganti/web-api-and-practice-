@@ -132,6 +132,41 @@
         ws.onmessage = function(e) {
 
         }
+        // notfification api (in-app notification)
+        if (Notification.permission === 'granted') {
+            showNotification();
+        } else if (Notification.permission === 'denied') {
+            Notification.requestPermission().then(permission => {
+                console.log(permission);
+            })
+        }
+
+        function showNotification() {
+            const note = new Notification('new message from doc', {
+                body: 'hello world',
+            });
+        }
+
+        // push notification
+        /** index.js file
+         * async function sw() {
+         *   const sw = await navigator.serviceWorker.register('./fileName');
+         *   const pushObj = sw.pushManger.subscribe({
+         *          userVisibleOnly: true,
+         *          applicationServerKey: '',  
+         *      });
+         * }
+         * 
+         * service-worker file
+         * addEventListener('push', e => {
+         *  e.waitUntil(
+         *  self.registration.sendNotification('test',{})
+         *  )
+         * })
+         */
+
+
+
         // fetch
         /*
         *fetch() won’t send cross-origin cookies unless you set the credentials init option (to include).
