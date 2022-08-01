@@ -109,14 +109,7 @@
         * activating
         * fetch
         */
-        // let worker = navigator.serviceWorker.register('/',)
-        navigator.serviceWorker.register('./service_worker.js')
-            .then(reg => console.log('Service Worker Registered'))
-            .catch(swErr => console.log(
-                `Service Worker Installation Error: ${swErr}}`));
-
-
-
+       
         //SSE (server sent event) (one way messaging)
 
         // const evtSource = new EventSource("//api.example.com/ssedemo.php", { withCredentials: true } );
