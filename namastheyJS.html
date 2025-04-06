@@ -288,6 +288,41 @@
     <tr><td>search()</td><td>Regex search index</td><td>str.search(regex)</td><td>"abc".search(/b/) → 1</td></tr>
   </tbody>
 </table>
+<h3>Summary: slice() vs substring() vs substr()</h3>
+<table border="1" cellpadding="6" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Supports Negative Start</th>
+      <th>Swaps Indices if start &gt; end</th>
+      <th>Second Argument Means</th>
+      <th>Deprecated?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>slice(start, end)</code></td>
+      <td>✅ Yes</td>
+      <td>❌ No</td>
+      <td>End index (exclusive)</td>
+      <td>❌ No</td>
+    </tr>
+    <tr>
+      <td><code>substring(start, end)</code></td>
+      <td>❌ No</td>
+      <td>✅ Yes</td>
+      <td>End index (exclusive)</td>
+      <td>❌ No</td>
+    </tr>
+    <tr>
+      <td><code>substr(start, length)</code></td>
+      <td>✅ Yes</td>
+      <td>❌ No</td>
+      <td>Length of substring</td>
+      <td>⚠️ Yes (Deprecated)</td>
+    </tr>
+  </tbody>
+</table>
 
 
     <h2>Static Methods of <code>Object</code></h2>
