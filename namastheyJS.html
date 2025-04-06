@@ -221,6 +221,273 @@
         Capturing and bubbling allow us to implement one of most powerful event handling patterns called event delegation.
         */
     </script>
+
+    <h2>Array Methods</h2>
+<table border="1" cellpadding="6" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Description</th>
+      <th>Syntax</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>push()</td><td>Adds item(s) to end</td><td>array.push(item)</td><td>[1,2].push(3) → [1,2,3]</td></tr>
+    <tr><td>pop()</td><td>Removes last item</td><td>array.pop()</td><td>[1,2,3].pop() → 3</td></tr>
+    <tr><td>unshift()</td><td>Adds item(s) to start</td><td>array.unshift(item)</td><td>[2,3].unshift(1) → [1,2,3]</td></tr>
+    <tr><td>shift()</td><td>Removes first item</td><td>array.shift()</td><td>[1,2,3].shift() → 1</td></tr>
+    <tr><td>splice()</td><td>Add/removes items</td><td>array.splice(start, deleteCount, ...items)</td><td>[1,2,3].splice(1,1) → [1,3]</td></tr>
+    <tr><td>slice()</td><td>Returns a section</td><td>array.slice(start, end)</td><td>[1,2,3].slice(1,2) → [2]</td></tr>
+    <tr><td>concat()</td><td>Merges arrays</td><td>array1.concat(array2)</td><td>[1].concat([2,3]) → [1,2,3]</td></tr>
+    <tr><td>indexOf()</td><td>Finds index</td><td>array.indexOf(item)</td><td>[1,2,3].indexOf(2) → 1</td></tr>
+    <tr><td>includes()</td><td>Checks for item</td><td>array.includes(item)</td><td>[1,2,3].includes(2) → true</td></tr>
+    <tr><td>find()</td><td>Finds first match</td><td>array.find(fn)</td><td>[1,2,3].find(x=>x>1) → 2</td></tr>
+    <tr><td>filter()</td><td>Filters items</td><td>array.filter(fn)</td><td>[1,2,3].filter(x=>x>1) → [2,3]</td></tr>
+    <tr><td>map()</td><td>Transforms items</td><td>array.map(fn)</td><td>[1,2,3].map(x=>x*2) → [2,4,6]</td></tr>
+    <tr><td>reduce()</td><td>Reduces to value</td><td>array.reduce(fn, init)</td><td>[1,2,3].reduce((a,b)=>a+b,0) → 6</td></tr>
+    <tr><td>forEach()</td><td>Iterates over items</td><td>array.forEach(fn)</td><td>[1,2].forEach(x=>console.log(x))</td></tr>
+    <tr><td>sort()</td><td>Sorts items</td><td>array.sort([fn])</td><td>[2,1].sort() → [1,2]</td></tr>
+    <tr><td>reverse()</td><td>Reverses array</td><td>array.reverse()</td><td>[1,2,3].reverse() → [3,2,1]</td></tr>
+    <tr><td>join()</td><td>Joins to string</td><td>array.join(sep)</td><td>[1,2,3].join('-') → "1-2-3"</td></tr>
+    <tr><td>flat()</td><td>Flattens array</td><td>array.flat(depth)</td><td>[1,[2,[3]]].flat(2) → [1,2,3]</td></tr>
+    <tr><td>every()</td><td>Tests all elements</td><td>array.every(fn)</td><td>[1,2,3].every(x=>x>0) → true</td></tr>
+    <tr><td>some()</td><td>Tests any element</td><td>array.some(fn)</td><td>[1,2,3].some(x=>x>2) → true</td></tr>
+  </tbody>
+</table>
+<h2>String Methods</h2>
+<table border="1" cellpadding="6" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Description</th>
+      <th>Syntax</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>charAt()</td><td>Char at index</td><td>str.charAt(index)</td><td>"abc".charAt(1) → "b"</td></tr>
+    <tr><td>charCodeAt()</td><td>Unicode of char</td><td>str.charCodeAt(index)</td><td>"A".charCodeAt(0) → 65</td></tr>
+    <tr><td>concat()</td><td>Joins strings</td><td>str.concat(str2)</td><td>"a".concat("b") → "ab"</td></tr>
+    <tr><td>includes()</td><td>Checks substring</td><td>str.includes(value)</td><td>"hello".includes("el") → true</td></tr>
+    <tr><td>indexOf()</td><td>First occurrence</td><td>str.indexOf(value)</td><td>"abc".indexOf("b") → 1</td></tr>
+    <tr><td>lastIndexOf()</td><td>Last occurrence</td><td>str.lastIndexOf(value)</td><td>"ababc".lastIndexOf("b") → 3</td></tr>
+    <tr><td>startsWith()</td><td>Begins with</td><td>str.startsWith(value)</td><td>"hello".startsWith("he") → true</td></tr>
+    <tr><td>endsWith()</td><td>Ends with</td><td>str.endsWith(value)</td><td>"hello".endsWith("lo") → true</td></tr>
+    <tr><td>slice()</td><td>Substring slice</td><td>str.slice(start, end)</td><td>"abcde".slice(1,3) → "bc"</td></tr>
+    <tr><td>substring()</td><td>Part of string</td><td>str.substring(start, end)</td><td>"abcde".substring(1,3) → "bc"</td></tr>
+    <tr><td>substr()</td><td>Part by length</td><td>str.substr(start, length)</td><td>"abcde".substr(1,2) → "bc"</td></tr>
+    <tr><td>toUpperCase()</td><td>Uppercase</td><td>str.toUpperCase()</td><td>"abc".toUpperCase() → "ABC"</td></tr>
+    <tr><td>toLowerCase()</td><td>Lowercase</td><td>str.toLowerCase()</td><td>"ABC".toLowerCase() → "abc"</td></tr>
+    <tr><td>trim()</td><td>Remove whitespace</td><td>str.trim()</td><td>"  abc  ".trim() → "abc"</td></tr>
+    <tr><td>repeat()</td><td>Repeat string</td><td>str.repeat(count)</td><td>"ab".repeat(2) → "abab"</td></tr>
+    <tr><td>replace()</td><td>Replace first match</td><td>str.replace(search, replace)</td><td>"abc".replace("b","x") → "axc"</td></tr>
+    <tr><td>replaceAll()</td><td>Replace all</td><td>str.replaceAll(search, replace)</td><td>"a.b.a".replaceAll(".","x") → "axbxa"</td></tr>
+    <tr><td>split()</td><td>Split to array</td><td>str.split(separator)</td><td>"a-b-c".split("-") → ["a","b","c"]</td></tr>
+    <tr><td>match()</td><td>Regex match</td><td>str.match(regex)</td><td>"abc".match(/b/) → ["b"]</td></tr>
+    <tr><td>search()</td><td>Regex search index</td><td>str.search(regex)</td><td>"abc".search(/b/) → 1</td></tr>
+  </tbody>
+</table>
+
+
+    <h2>Static Methods of <code>Object</code></h2>
+<table border="1" cellpadding="6" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><code>Object.assign(target, ...sources)</code></td><td>Copies properties from source objects to the target object.</td></tr>
+    <tr><td><code>Object.create(proto, [propertiesObject])</code></td><td>Creates a new object with the specified prototype.</td></tr>
+    <tr><td><code>Object.defineProperty(obj, prop, descriptor)</code></td><td>Adds or modifies a property directly on an object.</td></tr>
+    <tr><td><code>Object.defineProperties(obj, props)</code></td><td>Adds or modifies multiple properties.</td></tr>
+    <tr><td><code>Object.entries(obj)</code></td><td>Returns an array of <code>[key, value]</code> pairs.</td></tr>
+    <tr><td><code>Object.freeze(obj)</code></td><td>Freezes an object (no modifications allowed).</td></tr>
+    <tr><td><code>Object.fromEntries(iterable)</code></td><td>Creates an object from key-value pairs.</td></tr>
+    <tr><td><code>Object.getOwnPropertyDescriptor(obj, prop)</code></td><td>Returns descriptor for a specific property.</td></tr>
+    <tr><td><code>Object.getOwnPropertyDescriptors(obj)</code></td><td>Returns all own property descriptors.</td></tr>
+    <tr><td><code>Object.getOwnPropertyNames(obj)</code></td><td>Returns an array of all own property names.</td></tr>
+    <tr><td><code>Object.getOwnPropertySymbols(obj)</code></td><td>Returns an array of symbol properties.</td></tr>
+    <tr><td><code>Object.getPrototypeOf(obj)</code></td><td>Returns the prototype of the object.</td></tr>
+    <tr><td><code>Object.hasOwn(obj, prop)</code></td><td>Returns <code>true</code> if object has the property.</td></tr>
+    <tr><td><code>Object.is(value1, value2)</code></td><td>Determines if two values are the same.</td></tr>
+    <tr><td><code>Object.isExtensible(obj)</code></td><td>Checks if new properties can be added.</td></tr>
+    <tr><td><code>Object.isFrozen(obj)</code></td><td>Checks if object is frozen.</td></tr>
+    <tr><td><code>Object.isSealed(obj)</code></td><td>Checks if object is sealed.</td></tr>
+    <tr><td><code>Object.keys(obj)</code></td><td>Returns enumerable property names.</td></tr>
+    <tr><td><code>Object.preventExtensions(obj)</code></td><td>Prevents new properties from being added.</td></tr>
+    <tr><td><code>Object.seal(obj)</code></td><td>Seals the object (no add/remove of props).</td></tr>
+    <tr><td><code>Object.setPrototypeOf(obj, proto)</code></td><td>Sets the prototype of an object.</td></tr>
+    <tr><td><code>Object.values(obj)</code></td><td>Returns enumerable property values.</td></tr>
+  </tbody>
+</table>
+
+<code>
+const obj = {};
+Object.defineProperty(obj, 'name', {
+  value: 'Alice',
+  writable: false,        // can't change the value
+  enumerable: true,       // shows up in Object.keys()
+  configurable: false     // can't delete or redefine the property
+});
+
+console.log(obj.name);    // "Alice"
+obj.name = 'Bob';         // fails silently in non-strict mode
+</code>
+
+<h2>Symbol</h2>
+<table border="1" cellpadding="6" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Aspect</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Purpose</td><td>Creates unique and immutable identifiers, usually used as object property keys.</td></tr>
+    <tr><td>Type</td><td>Primitive</td></tr>
+    <tr><td>Creation</td><td><code>Symbol('description')</code></td></tr>
+    <tr><td>Uniqueness</td><td>Each Symbol is unique, even if the descriptions are the same.</td></tr>
+    <tr><td>Use case</td><td>To define hidden or non-colliding object properties.</td></tr>
+    <tr><td>Global registry</td><td><code>Symbol.for()</code> and <code>Symbol.keyFor()</code> access shared symbols.</td></tr>
+  </tbody>
+</table>
+<h2>Map</h2>
+<table border="1" cellpadding="6" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Aspect</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Purpose</td><td>Stores key-value pairs where keys can be any type (objects, functions, primitives).</td></tr>
+    <tr><td>Preserves Order</td><td>Yes, insertion order is preserved.</td></tr>
+    <tr><td>Iteration</td><td>Supports <code>forEach</code>, <code>for...of</code>, <code>entries()</code>, etc.</td></tr>
+    <tr><td>Key type</td><td>Any (unlike object keys which are strings or symbols)</td></tr>
+    <tr><td>Methods</td><td><code>set()</code>, <code>get()</code>, <code>has()</code>, <code>delete()</code>, <code>clear()</code></td></tr>
+    <tr><td>Size</td><td>Accessible via <code>map.size</code></td></tr>
+  </tbody>
+</table>
+<h2>Set</h2>
+<table border="1" cellpadding="6" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Aspect</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Purpose</td><td>Stores unique values of any type.</td></tr>
+    <tr><td>Duplicates</td><td>Not allowed; duplicates are automatically removed.</td></tr>
+    <tr><td>Preserves Order</td><td>Yes, insertion order is preserved.</td></tr>
+    <tr><td>Iteration</td><td>Supports <code>forEach</code>, <code>for...of</code>, <code>values()</code></td></tr>
+    <tr><td>Methods</td><td><code>add()</code>, <code>has()</code>, <code>delete()</code>, <code>clear()</code></td></tr>
+    <tr><td>Size</td><td>Accessible via <code>set.size</code></td></tr>
+  </tbody>
+</table>
+<h2>WeakMap</h2>
+<table border="1" cellpadding="6" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Aspect</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Purpose</td><td>Maps objects to values, and does not prevent garbage collection of keys.</td></tr>
+    <tr><td>Key type</td><td>Only objects (not primitives).</td></tr>
+    <tr><td>Garbage Collection</td><td>Keys are weakly referenced — if there are no other references, they can be collected.</td></tr>
+    <tr><td>Methods</td><td><code>set()</code>, <code>get()</code>, <code>has()</code>, <code>delete()</code></td></tr>
+    <tr><td>Iteration</td><td>Not iterable (no <code>forEach</code>, <code>for...of</code>, etc.)</td></tr>
+    <tr><td>Use case</td><td>Private data storage for objects without preventing GC.</td></tr>
+  </tbody>
+</table>
+<h2>WeakSet</h2>
+<table border="1" cellpadding="6" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Aspect</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Purpose</td><td>Stores weakly held objects only, with no duplicates.</td></tr>
+    <tr><td>Value type</td><td>Only objects (not primitives).</td></tr>
+    <tr><td>Garbage Collection</td><td>Objects in the set are weakly referenced and can be GC'd.</td></tr>
+    <tr><td>Methods</td><td><code>add()</code>, <code>has()</code>, <code>delete()</code></td></tr>
+    <tr><td>Iteration</td><td>Not iterable</td></tr>
+    <tr><td>Use case</td><td>Track object presence without memory leaks.</td></tr>
+  </tbody>
+</table>
+<h2>Promise</h2>
+<table border="1" cellpadding="6" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Aspect</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Purpose</td><td>Represents the eventual completion or failure of an asynchronous operation.</td></tr>
+    <tr><td>States</td><td><code>pending</code>, <code>fulfilled</code>, <code>rejected</code></td></tr>
+    <tr><td>Creation</td><td><code>new Promise((resolve, reject) => { ... })</code></td></tr>
+    <tr><td>Chaining</td><td><code>then()</code>, <code>catch()</code>, <code>finally()</code></td></tr>
+    <tr><td>Use case</td><td>Handle async operations like API calls, timers, etc.</td></tr>
+    <tr><td>Helpers</td><td><code>Promise.all</code>, <code>Promise.race</code>, <code>Promise.allSettled</code>, <code>Promise.any</code></td></tr>
+  </tbody>
+</table>
+<h2>Comparison of Promise Combinators</h2>
+<table border="1" cellpadding="6" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Description</th>
+      <th>Resolves When</th>
+      <th>Rejects When</th>
+      <th>Returned Value</th>
+      <th>Use Case</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Promise.all</strong></td>
+      <td>Waits for all promises to fulfill. Fails fast if any reject.</td>
+      <td>All promises fulfill</td>
+      <td>Any promise rejects</td>
+      <td>Array of results</td>
+      <td>All tasks must succeed (e.g., load multiple resources)</td>
+    </tr>
+    <tr>
+      <td><strong>Promise.race</strong></td>
+      <td>Settles as soon as the first promise settles (resolve or reject).</td>
+      <td>First promise resolves</td>
+      <td>First promise rejects</td>
+      <td>Value or reason from first settled promise</td>
+      <td>Use fastest result (e.g., timeout wrapper)</td>
+    </tr>
+    <tr>
+      <td><strong>Promise.allSettled</strong></td>
+      <td>Waits for all promises to settle (resolve or reject).</td>
+      <td>All promises settle</td>
+      <td>Never rejects</td>
+      <td>Array of status/result objects</td>
+      <td>Need result of every task, success or failure</td>
+    </tr>
+    <tr>
+      <td><strong>Promise.any</strong></td>
+      <td>Waits for the first fulfilled promise. Ignores rejections unless all fail.</td>
+      <td>First promise fulfills</td>
+      <td>All promises reject</td>
+      <td>Value from first fulfilled promise</td>
+      <td>Use any successful result (e.g., fallback servers)</td>
+    </tr>
+  </tbody>
+</table>
+
+
 </body>
 
 </html>
